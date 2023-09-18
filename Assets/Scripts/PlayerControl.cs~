@@ -1,0 +1,37 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerControl : MonoBehaviour
+{
+		public float const_accel = 5.0f;
+		public float flySpeed = 25.0f;
+		private float flyInput;
+		private float horizontalInput;
+		// private float tunnelCRInput;  // Clockwise Rotation for tunnel
+		// private float tunnelCCRInput; // Counterclockwise Rotation for tunnel
+		
+    void Start()
+    {
+        
+    }
+
+    void Update()
+    {
+        flyInput = Input.GetAxis("Vertical");
+		horizontalInput = Input.GetAxis("Horizontal");
+		// tunnelCRInput = Input.GetKey(KeyCode.RightShift);
+		// tunnelCCRInput = Input.GetKey(KeyCode.Space);
+
+		transform.Rotate(Vector3.right * flySpeed * flyInput * Time.deltaTime);
+		transform.Rotate(Vector3.up * turnSpeed * horizontalInput * Time.deltaTime);
+		transform.Translate(Vector3.forward * const_accel * Time.deltaTime);
+
+		// if (tunnelCRInput) {
+		// 		transform.Rotate(Vector3.right * tunnelCRInput * Time.deltaTime);
+		// }
+		// else if (tunnelCCRInput) {
+		// 		transform.Rotate(Vector3.right * tunnelCCRInput * Time.deltaTime);
+		// }
+    }
+}
