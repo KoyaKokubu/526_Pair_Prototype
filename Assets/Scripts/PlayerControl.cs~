@@ -6,10 +6,9 @@ public class PlayerControl : MonoBehaviour
 {
 		public float const_accel = 5.0f;
 		public float flySpeed = 25.0f;
+		public float turnSpeed = 25.0f;
 		private float flyInput;
 		private float horizontalInput;
-		// private float tunnelCRInput;  // Clockwise Rotation for tunnel
-		// private float tunnelCCRInput; // Counterclockwise Rotation for tunnel
 		
     void Start()
     {
@@ -19,19 +18,22 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         flyInput = Input.GetAxis("Vertical");
-		horizontalInput = Input.GetAxis("Horizontal");
-		// tunnelCRInput = Input.GetKey(KeyCode.RightShift);
-		// tunnelCCRInput = Input.GetKey(KeyCode.Space);
+				horizontalInput = Input.GetAxis("Horizontal");
 
-		transform.Rotate(Vector3.right * flySpeed * flyInput * Time.deltaTime);
-		transform.Rotate(Vector3.up * turnSpeed * horizontalInput * Time.deltaTime);
-		transform.Translate(Vector3.forward * const_accel * Time.deltaTime);
-
-		// if (tunnelCRInput) {
-		// 		transform.Rotate(Vector3.right * tunnelCRInput * Time.deltaTime);
-		// }
-		// else if (tunnelCCRInput) {
-		// 		transform.Rotate(Vector3.right * tunnelCCRInput * Time.deltaTime);
-		// }
+				transform.Rotate(Vector3.left * flySpeed * flyInput * Time.deltaTime);
+				transform.Rotate(Vector3.up * turnSpeed * horizontalInput * Time.deltaTime);
+				transform.Translate(Vector3.forward * const_accel * Time.deltaTime);
     }
+
+		private void OnCollisionEnter(Collision collision) {
+				// Destroy(gameObject);
+				const_accel = 0;
+				flySpeed = 0;
+				turnSpeed = 0;
+				
+				GameObject.Find("/Player/Cube").GetComponent<Renderer>().material.color = Color.red;
+				// if (collision.gameObject.name == "Plane") {
+				// 		GetComponent<Renderer>().material.color = Color.black;
+				// }
+		}
 }
