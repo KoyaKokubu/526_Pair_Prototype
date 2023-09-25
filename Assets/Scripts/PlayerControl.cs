@@ -54,16 +54,25 @@ public class PlayerControl : MonoBehaviour
 	//{
 	//}
 
-	//private void OnCollisionEnter(Collision collision)
-	//{
-	//	// Destroy(gameObject);
-	//	const_accel = 0;
-	//	flySpeed = 0;
-	//	turnSpeed = 0;
+	// public void OnCollisionEnter(Collision collision)
+	// {
 
-	//	GameObject.Find("/Player/Cube").GetComponent<Renderer>().material.color = Color.red;
-	//	// if (collision.gameObject.name == "Plane") {
-	//	// 		GetComponent<Renderer>().material.color = Color.black;
-	//	// }
-	//}
+
+    //     Debug.Log("Cube color changed to red.");
+
+    //     if (collision.gameObject.name == "WinCube"){
+    //         // Destroy(gameObject);
+    //         const_accel = 0;
+    //         flySpeed = 0;
+    //         turnSpeed = 0;
+    //         Debug.Log("Cube color changed to red.");
+    //         GameObject.Find("/Player/Cube").GetComponent<Renderer>().material.color = Color.red;
+
+	// 	// if (collision.gameObject.name == "Plane") {
+	// 	// 		GetComponent<Renderer>().material.color = Color.black;
+	// 	// }
+
+    //     }
+		
+	// }
 }
