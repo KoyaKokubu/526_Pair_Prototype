@@ -27,8 +27,8 @@ public class PlayerTunnelCtr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float min_y = float.MaxValue;
-        int min_index = 0;
+        //float min_y = float.MaxValue;
+        //int min_index = 0;
         GameObject tunnelObj = GameObject.Find("/Tunnel");
         transform.Translate(Vector3.forward * const_accel * Time.deltaTime);
 
