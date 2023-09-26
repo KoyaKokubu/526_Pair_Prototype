@@ -19,11 +19,11 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         // flyInput = Input.GetAxis("Vertical");
-		// horizontalInput = Input.GetAxis("Horizontal");
+				// horizontalInput = Input.GetAxis("Horizontal");
 
-		// transform.Rotate(Vector3.left * flySpeed * flyInput * Time.deltaTime);
-		// transform.Rotate(Vector3.up * turnSpeed * horizontalInput * Time.deltaTime);
-		transform.Translate(Vector3.forward * const_accel * Time.deltaTime);
+				// transform.Rotate(Vector3.left * flySpeed * flyInput * Time.deltaTime);
+				// transform.Rotate(Vector3.up * turnSpeed * horizontalInput * Time.deltaTime);
+				transform.Translate(Vector3.forward * const_accel * Time.deltaTime);
 
 
         // Rigidbody rb = gameObject.GetComponent<Rigidbody>();
@@ -40,13 +40,15 @@ public class PlayerControl : MonoBehaviour
             }
         }
         Transform minChild = tunnelObj.transform.GetChild(min_index);
-        float distance = Vector3.Dot(-minChild.up, (transform.position - minChild.up));
+        float distance = Vector3.Dot(-minChild.up, (transform.position - minChild.position));
+				// bool isOutSide = Vector3.Dot(minChild.up, (transform.position - minChild.position)) < 0;
+				// if (isOutSide)
         if (distance > 0)
         {
             GameObject tunnelCube = GameObject.Find("/Tunnel/Cube");
             tunnelCube.GetComponent<Renderer>().material.color = Color.red;
 
-            transform.position += 3 * (1 + distance) * minChild.up;
+            transform.position += (1 + distance) * minChild.up;
         }
     }
 
