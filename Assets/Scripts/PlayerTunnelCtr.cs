@@ -10,6 +10,7 @@ public class PlayerTunnelCtr : MonoBehaviour
     public float RotateSpeed = 30;
     public float RotateInstant = 90;
     private float horizontalInput;
+		private float bonusTime = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +48,16 @@ public class PlayerTunnelCtr : MonoBehaviour
         }
         //
 
+				if (bonusTime > 0) {
+						Debug.Log(bonusTime);
+						bonusTime -= 1;
+						if (bonusTime == 0) {
+								GameObject playerCube = GameObject.Find("/Player/Cube");
+								playerCube.transform.localScale = new Vector3(2, 2, 2);
+								bonusTime = 0;
+						}
+				}
+
         // int childCount = tunnelObj.transform.childCount;
         // for (int i = 0; i < 4; i++)
         // {
@@ -72,15 +83,20 @@ public class PlayerTunnelCtr : MonoBehaviour
 		
   private void OnCollisionEnter(Collision collision)
 	{
-			Debug.Log(collision.gameObject.name);
+			// Debug.Log(collision.gameObject.name);
 		  if (collision.gameObject.name == "Cube"
-			||  collision.gameObject.name == "Cube (1)"
-			||  collision.gameObject.name == "Capsule"
-			||  collision.gameObject.name == "Cylinder"
+					||  collision.gameObject.name == "Capsule"
+					||  collision.gameObject.name == "Cylinder"
 			) {
 					const_accel = 0;
-					GameObject plaerCube = GameObject.Find("/Player/Cube");
-					plaerCube.GetComponent<Renderer>().material.color = Color.red;
+					GameObject playerCube = GameObject.Find("/Player/Cube");
+					playerCube.GetComponent<Renderer>().material.color = Color.red;
+			}
+			if (collision.gameObject.name == "Coin") {
+					GameObject playerCube = GameObject.Find("/Player/Cube");
+					playerCube.transform.localScale = new Vector3(1, 1, 1);
+					bonusTime = 5 / Time.deltaTime;
+					Destroy(collision.gameObject);
 			}
 	}
 	// private void OnCollisionEnter(Collision collision)
